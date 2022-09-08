@@ -1,6 +1,6 @@
 <template>
   <header>
-    <h3 class="title__subtitle">{{ title.subtitle }}</h3>
+    <h3 class="subtitle">{{ title.subtitle }}</h3>
     <h1 class="title">{{ title.title }}</h1>
     <div class="navbar">
       <div
@@ -67,26 +67,42 @@ header {
   align-items: center;
   justify-content: flex-start;
 
+  .title {
+    font-size: 5.2rem;
+    margin-top: 0;
+    margin-bottom: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1.5rem;
+  }
+
   .navbar {
-  width: calc(100% - 4rem);
-  display: flex;
-  justify-content: center;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
+    width: calc(100% - 4rem);
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
 
-  &__item {
-    border-left: 1px solid black;
-    border-right: 1px solid black;
-    margin-right: -1px;
-    padding: 0.75rem 3rem;
+    &__item {
+      border-left: 1px solid black;
+      border-right: 1px solid black;
+      margin-right: -1px;
+      padding: 0.75rem 3rem;
+      line-height: 1.5rem;
 
-    &--social {
-      padding: 0.75rem 0.5rem;
-    }
+      &--social {
+        padding: 0.75rem 0.5rem;
+      }
 
-    &__social {
-      margin: 0 0.5rem;
-    }
+      &__social {
+        margin: 0 0.5rem;
+      }
+
+      a {
+        text-decoration: inherit;
+        color: inherit;
+      }
   }
 }
 }
