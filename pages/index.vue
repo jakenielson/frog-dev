@@ -1,20 +1,17 @@
 <template>
-  <div class="page">
-    <SiteHeader />
-    <!-- <Home /> -->
-    <!-- <SiteFooter /> -->
+  <div class="page page--home">
+    <Home />
   </div>
 </template>
-<script>
-import SiteHeader from '~/components/SiteHeader.vue'
-// import SiteFooter from '~/components/SiteFooter.vue'
-// import Home from '~/components/Home.vue'
+<script setup>
+  import Home from '~/components/Home.vue'
 
-export default {
-  components: {
-    SiteHeader,
-    // SiteFooter,
-    // Home
-  }
-}
+  useHead({
+    title: "frog.dev",
+      meta: [{
+        hid: 'description',
+        name: 'description',
+        content: 'Follow the development of frog.dev, croak.io, manticorebook.com, and my other projects.'
+      }]
+  })
 </script>

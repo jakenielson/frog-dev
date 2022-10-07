@@ -1,28 +1,27 @@
 <template>
-  <main class="article">
-    <div class="article__card">
-      <h2 class="article__title">
-        {{ article?.title }}
-      </h2>
-      <div class="article__description">
-        {{ article?.description }}
-      </div>
+  <main class="about">
+    <div class="about__card">
       <img
-      v-if="article?.cover_image"
-      class="article__image"
-      :src="article?.cover_image" />
-      <ContentDoc />
+      v-if="about?.cover_image"
+      class="about__image"
+      :src="about?.cover_image" />
+      <div class="about__content">        
+        <h2 class="about__title">
+          {{ about?.title }}
+        </h2>
+        <ContentDoc />
+      </div>
     </div>
   </main>
 </template>
 
 <script setup>
   const route = useRoute()
-  const { data: article } = await useAsyncData(`${route.path}`, () => queryContent(route.path).findOne())
+  const { data: about } = await useAsyncData(`${route.path}`, () => queryContent(route.path).findOne())
 </script>
 
 <style lang="scss">
-  .article {
+  .about {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -32,7 +31,6 @@
       outline: 1px solid black;
       width: 54rem;
       margin: 4rem 0;
-      padding: 4rem 6rem;
     }
 
     &__title {
@@ -48,8 +46,12 @@
 
     &__image {
       width: 100%;
-      border: 1px solid black;
+      outline: 1px solid black;
       margin-bottom: 1.5rem;
+    }
+
+    &__content {
+      padding: 2rem 4rem;
     }
   }
 </style>

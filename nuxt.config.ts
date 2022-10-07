@@ -25,6 +25,7 @@ export default defineNuxtConfig({
     '@fortawesome/fontawesome-svg-core/styles.css'
   ],
   modules: [
-    '@nuxt/content'
+    '@nuxt/content',
+    'unplugin-icons/nuxt'
   ]
 })
