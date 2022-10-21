@@ -25,10 +25,18 @@
     text-decoration: inherit;
     cursor: pointer;
 
+    @media only screen and (max-width: $screen-sm-min) {
+      width: 100%;
+    }
+
     &__image {
       border-bottom: 1px solid black;
       object-fit: contain;
       width: 26rem;
+
+      @media only screen and (max-width: $screen-sm-min) {
+        width: 100%;
+      }
     }
 
     &__body {

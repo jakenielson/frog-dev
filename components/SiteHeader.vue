@@ -2,10 +2,35 @@
   <header>
     <h3 class="subtitle">{{ title.subtitle }}</h3>
     <h1 class="title">{{ title.title }}</h1>
+    <div class="sidebar__wrapper">
+      <div class="sidebar" :class="{ 'sidebar--open': showSidebar }">
+        <NuxtLink
+          v-for="item in navItems"
+          :to="item.link"
+          class="sidebar__item">
+          {{ item.text }}
+        </NuxtLink>
+        <NuxtLink
+          :to="{ path: '/', hash: '#projects' }"
+          external
+          class="sidebar__item">
+          Projects
+        </NuxtLink>
+      </div>
+    </div>
+    <IconHamburger class="hamburger" @click="burgerClick" />
     <div class="navbar">
       <div v-for="item in navItems" class="navbar__item">
         <NuxtLink :to="item.link" class="navbar__item__link">
           {{ item.text }}
+        </NuxtLink>
+      </div>
+      <div class="navbar__item">
+        <NuxtLink
+          :to="{ path: '/', hash: '#projects' }"
+          external
+          class="navbar__item__link">
+          Projects
         </NuxtLink>
       </div>
       <div class="navbar__item navbar__item--search">
@@ -43,6 +68,7 @@
   import IconTwitter from "~icons/cib/twitter"
   import IconGithub from "~icons/cib/github"
   import IconItchIo from "~icons/cib/itch-io"
+  import IconHamburger from "~icons/charm/menu-hamburger"
 
   const router = useRouter();
 
@@ -67,11 +93,7 @@
     {
       text: "Blog",
       link: "/blog",
-    },
-    {
-      text: "Contact",
-      link: "/",
-    },
+    }
   ];
 
   const socialItems = [
@@ -137,8 +159,19 @@
   };
 
   const goTo = (path) => {
-    path !== router.currentRoute && router.push({ path });
+    path !== router.currentRoute && router.push({ path })
   }
+
+  const showSidebar = ref(false)
+
+  const burgerClick = () => {
+    showSidebar.value = !showSidebar.value
+  }
+
+  router.beforeEach((to, from, next) => {
+    showSidebar.value = false
+    next()
+  })
 </script>
 <style lang="scss">
   header {
@@ -146,6 +179,13 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    max-width: 100vw;
+    overflow-x: hidden;
+
+    a {
+      text-decoration: inherit;
+      color: inherit;
+    }
 
     .title {
       font-size: 5.2rem;
@@ -156,7 +196,65 @@
     .subtitle {
       font-size: 1.5rem;
       font-weight: 200;
-      letter-spacing: 0.6rem;
+      letter-spacing: 0.4rem;
+      text-align: center;
+      max-width: 80vw;
+    }
+
+    .hamburger {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 2rem;
+      height: 2rem;
+      z-index: 100;
+    }
+
+    .sidebar {
+      position: absolute;
+      top: 0;
+      right: -10rem;
+      transition: right 0.5s;
+      outline: 1px solid black;
+      background-color: white;
+      padding: 6rem 2rem 2rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: flex-end;
+      gap: 3rem;
+      z-index: 10;
+      pointer-events: all;
+
+      &--open {
+        right: 0;
+      }
+
+      &__wrapper {
+        position: absolute;
+        top: 0;
+        right: 0;
+        overflow-x: hidden;
+        width: 10rem;
+        height: 24rem;
+        pointer-events: none;
+        z-index: 12;
+      }
+
+      &__item {
+        font-size: 1.5rem;
+
+        &:hover {
+          color: limegreen;
+          cursor: pointer;
+        }
+      }
+    }
+
+    @media only screen and (min-width: $screen-lg-min) {
+      .hamburger, .sidebar, .sidebar__wrapper {
+        display: none;
+      }
     }
 
     .navbar {
@@ -165,6 +263,11 @@
       justify-content: center;
       border-top: 1px solid black;
       border-bottom: 1px solid black;
+      overflow-x: hidden;
+
+      @media only screen and (max-width: $screen-lg-min) {
+        display: none;
+      }
 
       &__item {
         border-left: 1px solid black;
@@ -253,11 +356,6 @@
 
         &--search {
           padding: 0.75rem 1rem;
-        }
-
-        a {
-          text-decoration: inherit;
-          color: inherit;
         }
       }
     }

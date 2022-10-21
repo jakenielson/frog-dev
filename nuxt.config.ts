@@ -3,14 +3,14 @@ import { defineNuxtConfig } from 'nuxt'
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   head: {
-    title: 'frog-dev',
+    title: 'frog.dev',
     htmlAttrs: {
       lang: 'en'
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      { hid: 'description', name: 'description', content: 'a ribbeting development log' },
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
@@ -27,5 +27,14 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/content',
     'unplugin-icons/nuxt'
-  ]
+  ],
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@import "~/assets/css/variables.scss";'
+        }
+      }
+    }
+  }
 })

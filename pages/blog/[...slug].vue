@@ -30,9 +30,14 @@
 
     &__card {
       outline: 1px solid black;
-      width: 54rem;
-      margin: 4rem 0;
+      max-width: 54rem;
+      margin: 4rem 2rem;
       padding: 4rem 6rem;
+
+      @media only screen and (max-width: $screen-lg-min) {
+        outline: none;
+        padding: 0;
+      }
     }
 
     &__title {

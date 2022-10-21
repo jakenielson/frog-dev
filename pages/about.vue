@@ -29,8 +29,12 @@
 
     &__card {
       outline: 1px solid black;
-      width: 54rem;
-      margin: 4rem 0;
+      max-width: 54rem;
+      margin: 4rem 2rem;
+
+      @media only screen and (max-width: $screen-sm-min) {
+        outline: none;
+      }
     }
 
     &__title {
@@ -52,6 +56,10 @@
 
     &__content {
       padding: 2rem 4rem;
+
+      @media only screen and (max-width: $screen-sm-min) {
+        padding: 2rem 0;
+      }
     }
   }
 </style>

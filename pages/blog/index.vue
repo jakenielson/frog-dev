@@ -33,10 +33,14 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     margin: 2rem;
-    width: 54rem;
+    max-width: 54rem;
     gap: 2rem;
+
+    @media only screen and (max-width: $screen-lg-min) {
+      max-width: 26rem;
+    }
   }
 </style>
