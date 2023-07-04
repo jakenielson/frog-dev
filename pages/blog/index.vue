@@ -9,9 +9,11 @@
   </div>
 </template>
 <script setup>
-  import ArticleCard from '~/components/blog/ArticleCard.vue'
+  import ArticleCard from 'components/blog/ArticleCard.vue'
 
-  const { data: articles } = await useAsyncData('all-articles', () => queryContent('blog').find())
+  const { data: articles } = await useAsyncData('article-list', () =>
+    queryContent('blog').where({ tags: { $contains: "listed" } }).find())
+
   useHead({
     title: "Frog Blog",
       meta: [{
@@ -35,7 +37,7 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    margin: 2rem;
+    margin: 4rem 2rem 2rem 2rem;
     max-width: 54rem;
     gap: 2rem;
 

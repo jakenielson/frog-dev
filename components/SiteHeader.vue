@@ -3,7 +3,7 @@
     <h3 class="subtitle">{{ title.subtitle }}</h3>
     <h1 class="title">{{ title.title }}</h1>
     <div class="sidebar__wrapper">
-      <div class="sidebar" :class="{ 'sidebar--open': showSidebar }">
+      <div class="sidebar" :style="{ 'right': showSidebar ? '0' : '-13rem' }">
         <NuxtLink
           v-for="item in navItems"
           :to="item.link"
@@ -12,13 +12,23 @@
         </NuxtLink>
         <NuxtLink
           :to="{ path: '/', hash: '#projects' }"
-          external
           class="sidebar__item">
           Projects
         </NuxtLink>
+        <div class="sidebar__item--social">
+          <NuxtLink
+            v-for="item in socialItems"
+            :to="item.link"
+            target="_blank"
+            class="sidebar__item sidebar__item__social">
+            <IconTwitter v-if="item.icon === 'IconTwitter'" />
+            <IconGithub v-if="item.icon === 'IconGithub'" />
+            <IconItchIo v-if="item.icon === 'IconItchIo'" />
+          </NuxtLink>
+        </div>
       </div>
     </div>
-    <IconHamburger class="hamburger" @click="burgerClick" />
+    <IconHamburger class="hamburger" @click.native="burgerClick" />
     <div class="navbar">
       <div v-for="item in navItems" class="navbar__item">
         <NuxtLink :to="item.link" class="navbar__item__link">
@@ -70,11 +80,10 @@
   import IconItchIo from "~icons/cib/itch-io"
   import IconHamburger from "~icons/charm/menu-hamburger"
 
-  const router = useRouter();
+  const router = useRouter()
 
-  const { data: articles } = await useAsyncData("blog-index", () =>
-    queryContent("blog").find()
-  )
+  const { data: articles } = await useAsyncData('article-list', () =>
+    queryContent('blog').where({ tags: { $contains: "listed" } }).find())
 
   const title = {
     subtitle: "a ribbeting development log",
@@ -121,7 +130,7 @@
       filteredArticles.value = []
     } else {
       filteredArticles.value = articles.value.filter((article) =>
-        article.title.includes(searchInput.value)
+        article.title.toLowerCase().includes(searchInput.value.toLowerCase())
       )
     }
   };
@@ -165,7 +174,9 @@
   const showSidebar = ref(false)
 
   const burgerClick = () => {
+    console.log('burgerClick')
     showSidebar.value = !showSidebar.value
+    console.log('showSidebar', showSidebar.value)
   }
 
   router.beforeEach((to, from, next) => {
@@ -180,7 +191,6 @@
     align-items: center;
     justify-content: flex-start;
     max-width: 100vw;
-    overflow-x: hidden;
 
     a {
       text-decoration: inherit;
@@ -207,13 +217,13 @@
       right: 1rem;
       width: 2rem;
       height: 2rem;
-      z-index: 100;
+      z-index: 5;
+      cursor: pointer;
     }
 
     .sidebar {
       position: absolute;
       top: 0;
-      right: -10rem;
       transition: right 0.5s;
       outline: 1px solid black;
       background-color: white;
@@ -223,12 +233,8 @@
       align-items: flex-end;
       justify-content: flex-end;
       gap: 3rem;
-      z-index: 10;
+      z-index: 2;
       pointer-events: all;
-
-      &--open {
-        right: 0;
-      }
 
       &__wrapper {
         position: absolute;
@@ -236,17 +242,29 @@
         right: 0;
         overflow-x: hidden;
         width: 10rem;
-        height: 24rem;
+        height: 30rem;
         pointer-events: none;
-        z-index: 12;
+        z-index: 3;
       }
 
       &__item {
         font-size: 1.5rem;
 
+        &__social {
+          font-size: 1rem;
+        }
+
         &:hover {
           color: limegreen;
           cursor: pointer;
+        }
+
+        &--social {
+          display: flex;
+          flex-direction: row;
+          align-items: space-between;
+          justify-content: space-between;
+          width: 100%;
         }
       }
     }
@@ -263,7 +281,6 @@
       justify-content: center;
       border-top: 1px solid black;
       border-bottom: 1px solid black;
-      overflow-x: hidden;
 
       @media only screen and (max-width: $screen-lg-min) {
         display: none;

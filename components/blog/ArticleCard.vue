@@ -24,6 +24,7 @@
     color: inherit;
     text-decoration: inherit;
     cursor: pointer;
+    background-color: white;
 
     @media only screen and (max-width: $screen-sm-min) {
       width: 100%;

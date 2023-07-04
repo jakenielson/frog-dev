@@ -14,10 +14,8 @@
 </template>
 <script setup>
 const { data: featuredPost } = await useAsyncData("featured-post", () =>
-  queryContent("blog")
-    .where({ tags: { $contains: "featured" } })
-    .findOne()
-);
+  queryContent("blog").where({ tags: { $contains: "featured" } })
+  .findOne())
 </script>
 <style lang="scss">
 .featured-post {
@@ -27,6 +25,8 @@ const { data: featuredPost } = await useAsyncData("featured-post", () =>
   color: inherit;
   text-decoration: inherit;
   cursor: pointer;
+  max-width: 54rem;
+  background-color: white;
 
   @media only screen and (max-width: $screen-lg-min) {
     max-width: 26rem;

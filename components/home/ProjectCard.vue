@@ -31,7 +31,7 @@
       outline: 1px solid black;
       top: -1.5rem;
       font-size: 1rem;
-      font-weight: 200;
+      font-weight: 400;
       letter-spacing: 0.4rem;
       text-transform: lowercase;
     }

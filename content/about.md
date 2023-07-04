@@ -1,6 +1,6 @@
 ---
 title: About Me
-cover_image: https://res.cloudinary.com/dk2rspww8/image/upload/v1662612722/sample.jpg
+cover_image: /img/about.png
 author: Jake Nielson
 description: What is a frog?
 date: Oct 3, 2022

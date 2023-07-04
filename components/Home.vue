@@ -6,9 +6,10 @@
         <h3 class="home__column__title">
           what's new?
         </h3>
-        <ArticleCard
+        <!-- <ArticleCard
           v-for="article in articles"
-          :article="article" />
+          :key="`article-${article?.title}`"
+          :article="article" /> -->
       </div>
       <div class="home__column home__column--right">
         <h3 class="home__column__title">
@@ -27,6 +28,7 @@
         </h3>
         <ProjectCard
           v-for="project in projects"
+          :key="`project-${title}`"
           :image="project.image"
           :title="project.title"
           :link="project.link" />
@@ -40,14 +42,16 @@
   import ArticleCard from './blog/ArticleCard.vue'
 
   const { data: about } = await useAsyncData('about', () => queryContent('about').findOne())
-  const { data: articles } = await useAsyncData('all-articles', () => queryContent('blog').find())
+  const { data: articles } = await useAsyncData('latest-article-list', () =>
+    queryContent('blog').where({ tags: { $contains: "listed" } })
+    .limit(5).find())
 
   const projects = [{
-    image: 'https://res.cloudinary.com/dk2rspww8/image/upload/v1662612722/sample.jpg',
+    image: '/img/forest.png',
     title: 'croak.io',
     link: 'https://croak.io'
   }, {
-    image: 'https://res.cloudinary.com/dk2rspww8/image/upload/v1662612722/sample.jpg',
+    image: '/img/manticore.png',
     title: 'manticorebook.com',
     link: 'https://manticorebook.com'
   }]
