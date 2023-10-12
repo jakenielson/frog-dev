@@ -18,6 +18,15 @@
 <script setup>
   const route = useRoute()
   const { data: about } = await useAsyncData(`${route.path}`, () => queryContent(route.path).findOne())
+
+  useHead({
+    title: "About Me",
+      meta: [{
+        hid: 'description',
+        name: 'description',
+        content: 'Follow the development of frog.dev, croak.io, manticorebook.com, and my other projects.'
+      }]
+  })
 </script>
 
 <style lang="scss">

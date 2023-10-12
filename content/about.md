@@ -7,4 +7,4 @@ date: Oct 3, 2022
 publishOn: 2022-10-03T10:30:00
 tags: ["about"]
 ---
-I'm a web developer - full time, full stack. I started my career in software QA, self-taught Javascript and React, and dove head-first into the industry in 2017. Now I'm leading a small team doing big things in the eCommerce space. At heart, I'm a game developer. Years before I was a QA, I was plugging away at a GameMaker Studio game called Dungeon Boy. Now I'm getting back to my roots and building a multiplayer web game at [croak.io](https://croak.io). Thanks for stopping by! Check out my blog, my projects, and maybe say hello!
+Hi! I built this site from my little house in the PNW mountains. I am a professional web developer by day and a game developer by night. I love working with people and tackling big problems at my job, but I'll always have my own little passion projects that I work on at home. I love Dungeons & Dragons, horror manga, dance music, and frogs. Thanks for stopping by, check out my latest article!

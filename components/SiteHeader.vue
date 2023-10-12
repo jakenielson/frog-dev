@@ -28,14 +28,14 @@
         </div>
       </div>
     </div>
-    <IconHamburger class="hamburger" @click.native="burgerClick" />
+    <IconHamburger class="hamburger" @click="burgerClick" />
     <div class="navbar">
       <div v-for="item in navItems" class="navbar__item">
         <NuxtLink :to="item.link" class="navbar__item__link">
           {{ item.text }}
         </NuxtLink>
       </div>
-      <div class="navbar__item">
+      <div class="navbar__item" v-if="showProjects">
         <NuxtLink
           :to="{ path: '/', hash: '#projects' }"
           external
@@ -60,7 +60,7 @@
           </div>
         </div>
       </div>
-      <div class="navbar__item navbar__item--social">
+      <div class="navbar__item navbar__item--social" v-if="showSocials">
         <NuxtLink
           v-for="item in socialItems"
           :to="item.link"
@@ -79,6 +79,9 @@
   import IconGithub from "~icons/cib/github"
   import IconItchIo from "~icons/cib/itch-io"
   import IconHamburger from "~icons/charm/menu-hamburger"
+
+  const showSocials = false
+  const showProjects = false
 
   const router = useRouter()
 

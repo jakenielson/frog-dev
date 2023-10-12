@@ -27,9 +27,9 @@ export default defineNuxtConfig({
       if (process.env.NODE_ENV !== "development" && isClient) {
         // rc6
         // @ts-ignore
-        config.build.rollupOptions.output.chunkFileNames = "[hash].js"
+        config.build.rollupOptions.output.chunkFileNames = "_nuxt/[hash].js"
         // @ts-ignore
-        config.build.rollupOptions.output.entryFileNames = "[hash].js"
+        config.build.rollupOptions.output.entryFileNames = "_nuxt/[hash].js"
       }
     },
   },
@@ -56,12 +56,13 @@ export default defineNuxtConfig({
     highlight: {
       theme: 'github-light',
       preload: [
-        'js',
-        'css',
-        'shell',
-        'scss',
-        'vue-html',
-        'vue'
+        // 'js',
+        // 'css',
+        // 'shell',
+        // 'scss',
+        // 'vue-html',
+        // 'vue',
+        // 'cpp'
       ]
     }
   }

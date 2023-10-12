@@ -9,7 +9,7 @@
   </div>
 </template>
 <script setup>
-  import ArticleCard from 'components/blog/ArticleCard.vue'
+  import ArticleCard from '~/components/blog/ArticleCard.vue'
 
   const { data: articles } = await useAsyncData('article-list', () =>
     queryContent('blog').where({ tags: { $contains: "listed" } }).find())

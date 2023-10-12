@@ -77,7 +77,7 @@
       font-size: 1.2rem;
     }
 
-    &__image {
+    &__image, img {
       width: 100%;
       border: 1px solid black;
       margin-top: 1rem;

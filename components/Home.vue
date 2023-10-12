@@ -6,10 +6,10 @@
         <h3 class="home__column__title">
           what's new?
         </h3>
-        <!-- <ArticleCard
+        <ArticleCard
           v-for="article in articles"
           :key="`article-${article?.title}`"
-          :article="article" /> -->
+          :article="article" />
       </div>
       <div class="home__column home__column--right">
         <h3 class="home__column__title">
@@ -19,19 +19,21 @@
         v-if="about?.cover_image"
         class="home__column__image"
         :src="about?.cover_image" />
-        <ContentDoc path="/about" />
-        <div class="home__column__divider" />
-        <h3
-          id="projects"
-          class="home__column__title">
-          my stuff
-        </h3>
-        <ProjectCard
-          v-for="project in projects"
-          :key="`project-${title}`"
-          :image="project.image"
-          :title="project.title"
-          :link="project.link" />
+        <ContentRenderer :value="about" />
+        <div v-if="showProjects">
+          <div class="home__column__divider" />
+          <h3
+            id="projects"
+            class="home__column__title">
+            my stuff
+          </h3>
+          <ProjectCard
+            v-for="project in projects"
+            :key="`project-${title}`"
+            :image="project.image"
+            :title="project.title"
+            :link="project.link" />
+        </div>
       </div>
     </div>
   </main>
@@ -44,7 +46,9 @@
   const { data: about } = await useAsyncData('about', () => queryContent('about').findOne())
   const { data: articles } = await useAsyncData('latest-article-list', () =>
     queryContent('blog').where({ tags: { $contains: "listed" } })
-    .limit(5).find())
+    .sort({ publishOn: -1 }).limit(5).find())
+
+  const showProjects = false
 
   const projects = [{
     image: '/img/forest.png',
@@ -71,7 +75,7 @@
       width: calc(100% - 4rem);
       display: flex;
       flex-direction: row;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
 
       @media only screen and (max-width: $screen-lg-min) {
@@ -82,11 +86,11 @@
     }
 
     &__column {
-      height: 100rem;
       flex: 1;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
+      justify-content: flex-start;
       max-width: 26rem;
 
       &--right {
